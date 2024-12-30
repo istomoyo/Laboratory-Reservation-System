@@ -1,33 +1,33 @@
 # Laboratory-Reservation-System
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+###### 这是一个实验室预约系统的前端项目
 
-## Type Support for `.vue` Imports in TS
+NEFU系统分析大实践
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+后端代码见
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+###### 如何本地使用？
 
-## Project Setup
-
-```sh
-npm install
+```
+npm i
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
+
+###### 使用了哪些框架or技术？
+
+Tailwindcss	gsap	daisiyuUI	axios	xlsx	lenis	pinna	mitt
+
+
+
+12-30
+
+现在还有很多bug,以后会慢慢修改
+
