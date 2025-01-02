@@ -6,7 +6,7 @@
 
 NEFU系统分析大实践
 
-后端代码见
+后端代码见 @lsyachttps://github.com/lsyac/lab-management
 
 
 ###### 如何本地使用？
