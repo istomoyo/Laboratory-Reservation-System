@@ -96,7 +96,7 @@ onMounted(() => {
 
   props.weekInfo.forEach((e) => {
     if (e.date === date) {
-      numDay.value = props.today.numDay;
+      numDay.value = props.today.numDay - 1;
       // console.log("e", e);
     }
   });

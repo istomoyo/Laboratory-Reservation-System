@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <!-- row 1 -->
-        <tr v-for="(u, index) in userLists" :key="u.id" class=" hover">
+        <tr v-for="(u, index) in userLists" :key="u.id" class="hover">
           <th>
             {{ index + 1 }}
           </th>
@@ -41,9 +41,11 @@
       <tfoot>
         <tr>
           <th></th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
+          <th></th>
+          <th></th>
+          <th>用户名</th>
+          <th>角色</th>
+          <th>创建时间</th>
           <th></th>
         </tr>
       </tfoot>

@@ -349,6 +349,158 @@
         </button>
       </div>
     </div>
+    <div class="modal-box" v-else-if="modalBox === 'selectWeek'">
+      <h3 class="text-2xl font-medium">选择周次</h3>
+      <div class="grid grid-cols-7 gap-2 my-5">
+        <div class="form-control" v-for="i in 25">
+          <label class="cursor-pointer label">
+            <span class="label-text">{{ i }}</span>
+            <input
+              type="checkbox"
+              class="checkbox checkbox-secondary"
+              :value="i"
+              v-model="selectCourseWeek"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="flex">
+        <button
+          class="block w-2/5 py-2 mx-auto font-semibold text-white transition-all rounded-md btn btn-primary"
+          @click="submiteCourseWeek"
+        >
+          确定
+        </button>
+        <button
+          class="py-2 font-semibold text-[#333] transition-all rounded-md btn w-2/5 mx-auto block"
+          onclick="my_modal_1.close()"
+        >
+          取消
+        </button>
+      </div>
+    </div>
+    <div
+      class="w-11/12 max-w-5xl modal-box aspect-video"
+      v-else-if="modalBox === 'selectTime'"
+    >
+      <h3 class="text-2xl font-medium">选择时间</h3>
+      <div
+        class="w-max h-full flex-shrink-0 min-w-[1000px] courseTableItem courseTableItem1 max-h-screen p-5 flex"
+      >
+        <table
+          class="h-full text-center border-collapse table-auto bg-base-200 w-[5%]"
+        >
+          <tbody>
+            <tr>
+              <th class="border h-[30px] select-none text-base leading-4"></th>
+            </tr>
+            <tr>
+              <td class="border">
+                <span>一二节</span>
+                <span class="my-1 text-xs">8:00~9:35</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="border">
+                <span>三四节</span>
+                <span class="my-1 text-xs">9:55~11:30</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="border">
+                <span>五六节</span>
+                <span class="my-1 text-xs">13:40~15:15</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="border">
+                <span>七八节</span>
+                <span class="my-1 text-xs">15:35~17:10</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          class="w-full h-full max-h-screen text-center border border-collapse table-auto tabel"
+        >
+          <thead class="">
+            <tr>
+              <th
+                class="border h-[30px] select-none text-nowrap"
+                v-for="i in 7"
+              >
+                {{ daysOfWeek[i - 1] }}
+              </th>
+            </tr>
+          </thead>
+          <tbody ref="Items">
+            <!-- 示例行 -->
+            <tr v-for="(e, ei) in 4" :key="ei">
+              <td class="border" v-for="(p, pi) in 7" :key="pi">
+                <label class="text-2xl swap swap-flip">
+                  <!-- this hidden checkbox controls the state -->
+                  <input
+                    type="checkbox"
+                    class="block w-full h-full"
+                    v-model="selectTime"
+                    :value="{ dayOfWeek: pi + 1, section: ei + 1 }"
+                  />
+                  <div class="swap-on">😈</div>
+                  <div class="swap-off">😇</div>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex w-4/5 mx-auto">
+        <button
+          class="block w-2/5 py-2 mx-auto font-semibold text-white transition-all rounded-md btn btn-primary"
+          :class="
+            selectTime.length * 2 * WeekNum > timeLine ? 'btn-disabled' : ''
+          "
+          @click="submiteCourseTime"
+        >
+          确定
+        </button>
+        <button
+          class="py-2 font-semibold text-[#333] transition-all rounded-md btn w-2/5 mx-auto block"
+          onclick="my_modal_1.close()"
+        >
+          取消
+        </button>
+      </div>
+    </div>
+    <div class="modal-box" v-else-if="modalBox === 'selectLabs'">
+      <h3 class="text-2xl font-medium">选择实验室</h3>
+      <div class="w-full">
+        <AllLabs></AllLabs>
+      </div>
+      <div class="flex">
+        <button
+          class="block w-2/5 py-2 mx-auto font-semibold text-white transition-all rounded-md btn btn-primary"
+          @click="submiteCourseLab"
+        >
+          确定
+        </button>
+        <button
+          class="py-2 font-semibold text-[#333] transition-all rounded-md btn w-2/5 mx-auto block"
+          onclick="my_modal_1.close()"
+        >
+          取消
+        </button>
+      </div>
+    </div>
+    <div class="modal-box" v-else-if="modalBox === 'Warnning'">
+      <h3 class="text-2xl font-medium">Warnning</h3>
+      <div class="w-full">{{ warnningData.message }}</div>
+      <button
+        class="py-2 font-semibold text-[#333] transition-all rounded-md btn w-2/5 mx-auto block"
+        onclick="my_modal_1.close()"
+      >
+        关闭
+      </button>
+    </div>
   </dialog>
 </template>
 
@@ -372,6 +524,8 @@ const modalBox = ref(null);
 const isBot = ref();
 const userCode = ref();
 const labCourse = ref();
+const selectCourseWeek = ref([]);
+const warnningData = ref();
 const dateCourse = ref([
   { str: "一二节", time: "8:00~9:35" },
   { str: "三四节", time: "9:55~11:30" },
@@ -380,8 +534,20 @@ const dateCourse = ref([
   { str: "九十节", time: "18:00~19:35" },
   { str: "十一十二节", time: "19:40~21:15" },
 ]);
+const daysOfWeek = ref([
+  "星期一",
+  "星期二",
+  "星期三",
+  "星期四",
+  "星期五",
+  "星期六",
+  "星期日",
+]);
+const selectTime = ref([]);
 let currentCode;
 const AllLabsCom = ref();
+const timeLine = ref();
+const WeekNum = ref();
 const {
   courseArraryDataAction,
   my_modal_1_start_date,
@@ -512,6 +678,17 @@ function submitDescription() {
   );
   my_modal_1_close();
 }
+function submiteCourseTime() {
+  console.log("submiteCourseTime", selectTime.value);
+  emitter.emit("submiteCourseTime", selectTime.value);
+  my_modal_1_close();
+}
+function submiteCourseWeek() {
+  // console.log("selectCourseWeek", selectCourseWeek.value);
+  emitter.emit("CourseTableApp", selectCourseWeek.value);
+  my_modal_1_close();
+}
+function submiteCourseLab() {}
 onMounted(() => {
   emitter.on("modal", (item) => {
     modalBox.value = item.type;
@@ -553,6 +730,13 @@ onMounted(() => {
           name: item.data.name,
           state: item.data.state,
         };
+      } else if (modalBox.value === "selectTime") {
+        timeLine.value = item.data.timeLine;
+        WeekNum.value = item.data.WeekNum;
+        console.log("timeLine WeekNum", timeLine.value, WeekNum.value);
+      } else if (modalBox.value === "Warnning") {
+        warnningData.value = item.data;
+        console.log("warnningData", item.data);
       }
     }, 0);
   });

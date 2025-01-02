@@ -176,6 +176,15 @@
                   设置
                 </RouterLink>
               </li>
+              <li>
+                <RouterLink
+                  class="tracking-wider"
+                  :to="{ path: '/courseTableApp' }"
+                >
+                  <span class="icon-[fluent--fast-mode-16-filled] text-2xl"></span>
+                  一键预约
+                </RouterLink>
+              </li>
             </ul>
           </details>
         </li>
@@ -353,17 +362,17 @@ const { announcement, localAnnouncement } = getAnnouncements();
 const hasNewAnnoucement = ref(false);
 const changeTheme = () => {
   const htmlTheme = document.documentElement.dataset.theme;
-  if (htmlTheme === "business") {
+  if (htmlTheme === "lemonade") {
     document.documentElement.dataset.theme = "winter";
     localStorage.setItem(
       "NEFU_LABORATORY_RESERVATION_SYSTEM_HTMLTHEME",
       "winter"
     );
   } else if (htmlTheme === "winter") {
-    document.documentElement.dataset.theme = "business";
+    document.documentElement.dataset.theme = "lemonade";
     localStorage.setItem(
       "NEFU_LABORATORY_RESERVATION_SYSTEM_HTMLTHEME",
-      "business"
+      "lemonade"
     );
   }
 };

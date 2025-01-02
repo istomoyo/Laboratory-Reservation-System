@@ -69,6 +69,10 @@ const router = createRouter({
       component: AllUsers,
       meta: { requiresAuth: true },
     },
+    {
+      path: "/courseTableApp",
+      component: () => import("@/views/CourseTableApp.vue"),
+    },
 
     {
       path: "/",
