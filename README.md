@@ -6,7 +6,7 @@
 
 NEFU系统分析大实践
 
-后端代码见 [lsyac的Springboot项目](https://github.com/lsyac/lab-management)
+后端代码见  [lsyac的Springboot项目](https://github.com/lsyac/lab-management)
 
 
 ###### 如何本地使用？
