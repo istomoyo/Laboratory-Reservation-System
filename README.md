@@ -27,7 +27,10 @@ Tailwindcss	gsap	daisiyuUI	axios	xlsx	lenis	pinna	mitt
 
 
 
-12-30
+##### 12-30
 
 现在还有很多bug,以后会慢慢修改
 
+##### 1-2
+
+增加一键预约以及修改主题颜色
